@@ -1,6 +1,6 @@
 # API do Restaurante Dona Cida — Documentação de Endpoints
 
-    Base URL (produção): `...`
+    Base URL (produção): `https://tf-web-restaurante-dona-cida.vercel.app/`
 
     ## Convenções
 

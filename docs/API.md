@@ -24,15 +24,24 @@
     [
       {
         "id": 1,
-        "login": "maria12345"
+        "login": "maria12345",
+        "nome": "Maria Cristina",
+        "email": "maria12345@gmail.com",
+        "criadoEm": "2026-07-11T20:04:14.382Z"
       },
       {
         "id": 2,
-        "login": "joao67890"
+        "login": "joao67890",
+        "nome": "João Ferreira",
+        "email": "joao67890@gmail.com",
+        "criadoEm": "2026-07-11T20:42:44.562Z"
       },
       {
         "id": 3,
-        "login": "pedro02468"
+        "login": "pedro02468",
+        "nome": "Pedro Augusto",
+        "email": "pedro02468@gmail.com",
+        "criadoEm": "2026-07-11T20:04:14.382Z"
       }
     ]
     ```
@@ -53,7 +62,10 @@
     ```json
     {
       "id": 1,
-      "login": "maria12345"
+      "login": "maria12345",
+      "nome": "Maria Cristina",
+      "email": "maria12345@gmail.com",
+      "criadoEm": "2026-07-11T20:04:14.382Z"
     }
     ```
 
@@ -73,6 +85,8 @@
     ```json
     {
       "login": "maria12345",
+      "nome": "Maria Cristina",
+      "email": "maria12345@gmail.com",
       "senha": "minhasenha123"
     }
     ```
@@ -82,14 +96,17 @@
     ```json
     {
       "id": 1,
-      "login": "maria12345"
+      "login": "maria12345",
+      "nome": "Maria Cristina",
+      "email": "maria12345@gmail.com",
+      "criadoEm": "2026-07-11T20:04:14.382Z"
     }
     ```
 
     - **Erros:**
       - `400` — Campos obrigatórios ausentes
       - `401` — Credenciais inválidas (usuário não autenticado)
-      - `409` — Login já cadastrado
+      - `409` — Login e/ou email já cadastrado
 
 
   ### PUT /user/:id
@@ -102,7 +119,8 @@
     ```json
     {
       "login": "maria13579",
-      "senha": "minhasenha123"
+      "senha": "minhasenha123",
+      "email": "maria13579@gmail.com"
     }
     ```
 
@@ -111,15 +129,18 @@
     ```json
     {
       "id": 1,
-      "login": "maria13579"
+      "login": "maria13579",
+      "nome": "Maria Cristina",
+      "email": "maria13579@gmail.com",
+      "criadoEm": "2026-07-11T20:04:14.382Z"
     }
     ```
 
     - **Erros:**
-      - `400` — Campos obrigatórios ausentes ou ID inválido
+      - `400` — ID inválido
       - `401` — Credenciais inválidas (usuário não autenticado)
       - `404` — Usuário não encontrado (usuário com ID não existe)
-      - `409` — Login já cadastrado
+      - `409` — Login e/ou email já cadastrado
 
 
   ### DELETE /user/:id
@@ -288,7 +309,7 @@
       "categoria": "BEBIDA",
       "preco": 1.25,
       "descricao": "Água Mineral 500ml Grão Mogol sem Gás",
-      "avaliacoes": [],
+      "avaliacoes": []
     }
     ```
 
@@ -322,12 +343,12 @@
       "categoria": "BEBIDA",
       "preco": 1.25,
       "descricao": "Água Mineral 500ml Grão Mogol com Gás",
-      "avaliacoes": [],
+      "avaliacoes": []
     }
     ```
 
     - **Erros:**
-      - `400` — Campos obrigatórios ausentes ou preço inválido
+      - `400` — Preço inválido
       - `401` — Credenciais inválidas (usuário não autenticado)
       - `404` — Produto não encontrado (produto com ID não existe)
       - `409` — Nome inválido (duplicado)

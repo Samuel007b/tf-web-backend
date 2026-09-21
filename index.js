@@ -3,7 +3,7 @@ import express from 'express';
 import cors from 'cors';
 import logger from './middlewares/logger.js';
 import tratarErro from './middlewares/erro.js';
-// importe os routers necessários
+import produtoRoutes from './routes/produtos.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -20,7 +20,7 @@ app.get('/status', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date() });
 });
 
-// registre as rotas com os devidos prefixos
+app.use('/produtos', produtoRoutes);                      // ← novo
 
 app.use(tratarErro);
 

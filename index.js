@@ -3,7 +3,7 @@ import express from 'express';
 import cors from 'cors';
 import logger from './middlewares/logger.js';
 import tratarErro from './middlewares/erro.js';
-import produtoRoutes from './routes/produtoRoutes.js';   // ← novo
+import produtoRoutes from './routes/produtos.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;

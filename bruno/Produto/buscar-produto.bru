@@ -1,0 +1,22 @@
+meta {
+  name: Buscar produto (GET produtos/:id)
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/produtos/{{produtoId}}
+  body: none
+  auth: none
+}
+
+assert {
+  res.status: eq 200
+}
+
+tests {
+  test("deve retornar o produto com suas avaliações", function() {
+    expect(res.getBody().id).to.eql(Number(bru.getEnvVar('produtoId')));
+    expect(res.getBody()).to.have.property('avaliacoes');
+  });
+}

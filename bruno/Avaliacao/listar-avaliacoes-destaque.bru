@@ -1,0 +1,24 @@
+meta {
+  name: Listar avaliações em destaque (GET avaliacoes/destaque)
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/avaliacoes/destaque
+  body: none
+  auth: none
+}
+
+assert {
+  res.status: eq 200
+}
+
+tests {
+  test("deve retornar apenas avaliações com destaque=true", function() {
+    expect(res.getBody()).to.be.an('array');
+    res.getBody().forEach(function(avaliacao) {
+      expect(avaliacao.destaque).to.eql(true);
+    });
+  });
+}

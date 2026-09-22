@@ -1,0 +1,19 @@
+meta {
+  name: Deletar avaliação (DELETE avaliacoes/:id)
+  type: http
+  seq: 6
+}
+
+delete {
+  url: {{baseUrl}}/avaliacoes/{{avaliacaoId}}
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+assert {
+  res.status: eq 204
+}

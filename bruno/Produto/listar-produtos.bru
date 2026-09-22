@@ -1,0 +1,21 @@
+meta {
+  name: Listar produtos (GET produtos)
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{baseUrl}}/produtos
+  body: none
+  auth: none
+}
+
+assert {
+  res.status: eq 200
+}
+
+tests {
+  test("deve retornar um array de produtos", function() {
+    expect(res.getBody()).to.be.an('array');
+  });
+}

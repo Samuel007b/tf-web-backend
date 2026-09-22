@@ -1,0 +1,43 @@
+meta {
+  name: Login (POST userAdmin-login)
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/user/login
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "login": "{{adminLogin}}",
+    "senha": "{{adminSenha}}"
+  }
+}
+
+vars:pre-request {
+  baseUrl: https://turbo-funicular-5gw4v9j64pwx2v5vj-3000.app.github.dev
+}
+
+assert {
+  res.status: eq 200
+}
+
+script:post-response {
+  if (res.getStatus() === 200) {
+    bru.setEnvVar("token", res.getBody().token);
+  }
+}
+
+tests {
+  test("deve retornar um token JWT", function() {
+    expect(res.getBody()).to.have.property('token');
+    expect(res.getBody().token).to.be.a('string');
+  });
+}

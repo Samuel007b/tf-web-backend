@@ -1,0 +1,19 @@
+meta {
+  name: Deletar usuário (DELETE userAdmin/:id)
+  type: http
+  seq: 6
+}
+
+delete {
+  url: {{baseUrl}}/user/{{userId}}
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+assert {
+  res.status: eq 204
+}

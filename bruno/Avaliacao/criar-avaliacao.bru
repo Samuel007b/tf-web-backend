@@ -1,0 +1,43 @@
+meta {
+  name: Criar avaliação (POST avaliacoes)
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/avaliacoes
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "descricao": "Avaliação criada pela coleção de testes do Bruno",
+    "quantEstrelas": 5,
+    "midia": null,
+    "nomeCliente": "Cliente Teste Bruno",
+    "fotoCliente": null,
+    "produtoId": {{produtoId}}
+  }
+}
+
+script:post-response {
+  if (res.getStatus() === 201) {
+    bru.setEnvVar("avaliacaoId", res.getBody().id);
+  }
+}
+
+assert {
+  res.status: eq 201
+}
+
+tests {
+  test("deve criar a avaliação vinculada ao produto", function() {
+    expect(res.getBody()).to.have.property('id');
+    expect(res.getBody().produto.id).to.eql(Number(bru.getEnvVar('produtoId')));
+  });
+}

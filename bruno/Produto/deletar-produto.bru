@@ -1,0 +1,19 @@
+meta {
+  name: Deletar produto (DELETE produtos/:id) - rodar por último
+  type: http
+  seq: 5
+}
+
+delete {
+  url: {{baseUrl}}/produtos/{{produtoId}}
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+assert {
+  res.status: eq 204
+}

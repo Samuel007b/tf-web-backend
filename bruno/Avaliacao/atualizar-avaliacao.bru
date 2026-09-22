@@ -1,0 +1,25 @@
+meta {
+  name: Atualizar avaliação (PUT avaliacoes/:id)
+  type: http
+  seq: 5
+}
+
+put {
+  url: {{baseUrl}}/avaliacoes/{{avaliacaoId}}
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+assert {
+  res.status: eq 200
+}
+
+tests {
+  test("deve alternar o campo destaque", function() {
+    expect(res.getBody()).to.have.property('destaque');
+  });
+}

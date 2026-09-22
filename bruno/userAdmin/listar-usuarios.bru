@@ -1,0 +1,25 @@
+meta {
+  name: Listar usuários (GET userAdmin)
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/user
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+assert {
+  res.status: eq 200
+}
+
+tests {
+  test("deve retornar um array de usuários", function() {
+    expect(res.getBody()).to.be.an('array');
+  });
+}

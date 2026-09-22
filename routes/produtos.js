@@ -1,22 +1,19 @@
-import { Router } from 'express';
+import express from 'express';
 import {
   listarProdutos,
-  obterProdutoPorId,
+  buscarProduto,
   criarProduto,
   atualizarProduto,
   deletarProduto
 } from '../controllers/produtosController.js';
+import autenticar from '../middlewares/autenticar.js';
 
+const router = express.Router();
 
-const router = Router();
-
-
-router.get('/', listarProdutos);
-router.get('/:id', obterProdutoPorId);
-
-
-router.post('/', criarProduto);
-router.put('/:id', atualizarProduto);
-router.delete('/:id', deletarProduto);
+router.get('/', listarProdutos);                        // GET /produtos
+router.get('/:id', buscarProduto);                      // GET /produtos/:id
+router.post('/', autenticar, criarProduto);             // POST /produtos
+router.put('/:id', autenticar, atualizarProduto);       // PUT /produtos/:id
+router.delete('/:id', autenticar, deletarProduto);      // DELETE /produtos/:id
 
 export default router;

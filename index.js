@@ -3,7 +3,9 @@ import express from 'express';
 import cors from 'cors';
 import logger from './middlewares/logger.js';
 import tratarErro from './middlewares/erro.js';
-import produtoRoutes from './routes/produtos.js';
+import produtosRouter from './routes/produtos.js';
+import avaliacoesRouter from './routes/avaliacoes.js';
+import userAdminRouter from './routes/userAdmin.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -20,7 +22,11 @@ app.get('/status', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date() });
 });
 
-app.use('/produtos', produtoRoutes);                      // ← novo
+app.use('/produtos', produtosRouter);
+
+app.use('/avaliacoes', avaliacoesRouter);
+
+app.use('/user', userAdminRouter);
 
 app.use(tratarErro);
 

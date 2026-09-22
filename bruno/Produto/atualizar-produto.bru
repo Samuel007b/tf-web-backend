@@ -1,0 +1,41 @@
+meta {
+  name: Atualizar produto (PUT produtos/:id)
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{baseUrl}}/produtos/{{produtoId}}
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "nome": "Produto Teste Bruno Atualizado",
+    "foto": "https://exemplo.com/foto.jpg",
+    "destaque": true,
+    "categoria": "UNITARIO",
+    "preco": 12.5,
+    "descricao": "Descrição atualizada pela coleção de testes"
+  }
+}
+
+assert {
+  res.status: eq 200
+}
+
+tests {
+  test("deve atualizar o produto", function() {
+    expect(res.getBody().nome).to.eql('Produto Teste Bruno Atualizado');
+    expect(res.getBody().destaque).to.eql(true);
+  });
+}

@@ -1,0 +1,25 @@
+meta {
+  name: Listar avaliações (GET avaliacoes)
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{baseUrl}}/avaliacoes
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+assert {
+  res.status: eq 200
+}
+
+tests {
+  test("deve retornar um array de avaliações", function() {
+    expect(res.getBody()).to.be.an('array');
+  });
+}

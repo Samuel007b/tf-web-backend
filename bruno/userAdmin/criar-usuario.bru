@@ -1,0 +1,46 @@
+meta {
+  name: Criar usuário (POST userAdmin)
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/user
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "login": "usuario.teste.bruno",
+    "senha": "senhaTeste123",
+    "nome": "Usuário de Teste Bruno",
+    "email": "usuario.teste.bruno@example.com"
+  }
+}
+
+script:post-response {
+  if (res.getStatus() === 201) {
+    bru.setEnvVar("userId", res.getBody().id);
+  }
+}
+
+assert {
+  res.status: eq 201
+}
+
+tests {
+  test("deve criar o usuário sem retornar a senha", function() {
+    expect(res.getBody()).to.have.property('id');
+    expect(res.getBody()).to.not.have.property('senhaHash');
+    expect(res.getBody().login).to.eql('usuario.teste.bruno');
+  });
+}

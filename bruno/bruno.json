@@ -1,0 +1,6 @@
+{
+  "version": "1",
+  "name": "Restaurante Dona Cida API",
+  "type": "collection",
+  "ignore": ["node_modules", ".git"]
+}

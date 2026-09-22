@@ -1,0 +1,37 @@
+meta {
+  name: Atualizar usuário (PUT userAdmin/:id)
+  type: http
+  seq: 5
+}
+
+put {
+  url: {{baseUrl}}/user/{{userId}}
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "login": "usuario.teste.bruno",
+    "nome": "Usuário de Teste Bruno Atualizado",
+    "email": "usuario.teste.bruno@example.com"
+  }
+}
+
+assert {
+  res.status: eq 200
+}
+
+tests {
+  test("deve atualizar o nome do usuário", function() {
+    expect(res.getBody().nome).to.eql('Usuário de Teste Bruno Atualizado');
+  });
+}

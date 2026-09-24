@@ -138,18 +138,6 @@ export async function deletarProduto(req, res, next){
     if (!Number.isInteger(Number(id)) || Number(id)<=0) {
       return res.status(400).json({ erro: 'ID inválido' });
     }
-    const produtoExistente = await prisma.produto.findUnique({
-      where: { id: Number(id) },
-      select: selectProdutoAvaliacao
-    });
-    if (!produtoExistente) {
-      return res.status(404).json({ erro: 'Produto não encontrado' });
-    }
-    for(const avaliacao of produtoExistente.avaliacoes){
-      await prisma.avaliacao.delete({
-        where: { id: Number(avaliacao.id) },
-      });
-    }
     await prisma.produto.delete({
       where: { id: Number(id) }
     });
